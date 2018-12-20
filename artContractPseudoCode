@@ -59,7 +59,7 @@ int => *something* : map winningPictureIdByAuctionID
 
 // have a function to start a new auction. 
 
-// CAUTION: make this function be triggerable ONLY internal or by an admin. 
+// CAUTION: make this function be triggerable ONLY internal/private or by an admin. 
 // if not possible, put two implementations of this func into the smart contract, one for admins only and one for private only.
 // This is called in a private way by the placeBid() func !
 
