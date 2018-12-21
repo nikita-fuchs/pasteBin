@@ -59,7 +59,7 @@ int => *something* : map winningPictureIdByAuctionID
 
 // have a function to start a new auction. 
 
-// CAUTION: make this function be triggerable ONLY internal/private or by an admin. 
+// CAUTION: make this function be triggerable ONLY internal or by an admin. 
 // if not possible, put two implementations of this func into the smart contract, one for admins only and one for private only.
 // This is called in a private way by the placeBid() func !
 
@@ -133,7 +133,10 @@ function placeBid (int : _slot, *uniquePictureIDdataType* : _picture) stateful p
     // optional: you can require the bid to be at least X amount higher than the latest one 
     require (call.value + X > allAuctions[thisAuctionId].highestBid.bid)
 
-    // so if this bid is higher than the last one indeed, we set the current bid/bidder as the new leading bid
+    // so if this bid is higher than the last one indeed, we return the last bidder's bid...
+    send(allAuctions[thisAuctionId].highestBid.bid).to(allAuctions[thisAuctionId].highestBid.bidder)
+    
+    //...and set the current bid/bidder as the new leading bid
     allAuctions[thisAuctionId].highestBid = {
         bid: call.value,
         bidder: call.caller,
